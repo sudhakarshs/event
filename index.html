@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Event App • Dark</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="phone" id="app">
+    <!-- Header / Brand -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo-head.png">
+        </div>
+        <!-- <span class="brand-title">EventX</span> -->
+      </div>
+      <div class="actions">
+        <button id="searchBtn" class="icon-btn" aria-label="Search">
+          <span class="icon-search"></span>
+        </button>
+        <button id="notifBtn" class="icon-btn" aria-label="Notifications">
+          <span class="icon-bell"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Screens -->
+    <main class="screens">
+      <!-- LOGIN -->
+      <section class="screen log-screen" id="screen-login" data-screen="login">
+        
+        <div class="auth">
+          <div class="logo-home">
+            <img src="logo1.png">
+          </div>
+          <h1 class="h1">Welcome back</h1>
+          <p class="muted">Log in to continue</p>
+          <form id="loginForm" class="form" novalidate>
+            <label class="label">Email</label>
+            <input type="email" id="email" class="input" placeholder="you@example.com" required />
+
+            <label class="label">Password</label>
+            <input type="password" id="password" class="input" placeholder="••••••••" required />
+
+            <div class="row between">
+              <a href="#" class="link muted small">Forgot password?</a>
+              <a href="#" class="link small">Sign up</a>
+            </div>
+
+            <button class="btn primary w-full mt-16" type="submit">Login</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- LISTING -->
+      <section class="screen" id="screen-listing" data-screen="listing" hidden>
+        <div class="event-image">
+          <img src="event.png">
+        </div>
+        <div class="section-header">
+          <h2 class="h2">Popular Events</h2>
+          <div class="filters">
+            <button class="chip">Date</button>
+            <button class="chip">City</button>
+            <button class="chip">Category</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="card event" data-goto="details">
+            <div class="event-list">
+              <img src="event1.png">
+            </div>
+            <div class="content">
+              <h3 class="h3">Championship Final 2025</h3>
+              <div class="meta">
+                <span class="icon clock"></span>
+                <span>Sat, Oct 12 • 7:30 PM</span>
+              </div>
+              <div class="meta">
+                <span class="icon pin"></span>
+                <span>National Stadium, Capital City</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card event" data-goto="details">
+            <div class="event-list">
+              <img src="event2.png">
+            </div>
+            <div class="content">
+              <h3 class="h3">City Derby</h3>
+              <div class="meta">
+                <span class="icon clock"></span>
+                <span>Sun, Nov 3 • 6:00 PM</span>
+              </div>
+              <div class="meta">
+                <span class="icon pin"></span>
+                <span>Metro Arena, Downtown</span>
+              </div>
+            </div>
+          </article>
+          <article class="card event" data-goto="details">
+            <div class="event-list">
+              <img src="event1.png">
+            </div>
+            <div class="content">
+              <h3 class="h3">City Derby</h3>
+              <div class="meta">
+                <span class="icon clock"></span>
+                <span>Sun, Nov 3 • 6:00 PM</span>
+              </div>
+              <div class="meta">
+                <span class="icon pin"></span>
+                <span>Metro Arena, Downtown</span>
+              </div>
+            </div>
+          </article>
+          <article class="card event" data-goto="details">
+            <div class="event-list">
+              <img src="event2.png">
+            </div>
+            <div class="content">
+              <h3 class="h3">City Derby</h3>
+              <div class="meta">
+                <span class="icon clock"></span>
+                <span>Sun, Nov 3 • 6:00 PM</span>
+              </div>
+              <div class="meta">
+                <span class="icon pin"></span>
+                <span>Metro Arena, Downtown</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SEARCH RESULTS -->
+      <section class="screen" id="screen-search" data-screen="search" hidden>
+        <div class="section-header">
+          <h2 class="h2">Search Results</h2>
+          <div class="muted small" id="searchSummary">Type to find events…</div>
+        </div>
+        <div class="cards" id="searchResults"></div>
+      </section>
+
+      <!-- DETAILS -->
+      <section class="screen" id="screen-details" data-screen="details" hidden>
+        <div class="hero-img">
+          <img src="stage.png">
+        </div>
+        <div class="pad">
+          <button class="back-btn" data-goto="listing" aria-label="Back">
+            <span class="icon-back"></span>
+          </button>
+          <h2 class="h2 mt-8">Championship Final 2025</h2>
+          <div class="meta mt-8"><span class="icon clock"></span><span>Sat, Oct 12 • 7:30 PM</span></div>
+          <div class="meta mt-6"><span class="icon pin"></span><span>National Stadium, Capital City</span></div>
+
+          <h3 class="h4 mt-16">About the event</h3>
+          <p class="muted">
+            Experience the ultimate showdown with top teams battling for the title.
+            Gates open at 6:00 PM. Outside food and drinks not allowed.
+          </p>
+
+          <h3 class="h4 mt-16">Travel details</h3>
+          <ul class="list">
+            <li><strong>Nearest Airport:</strong> Capital International (CIT) – 18 km</li>
+            <li><strong>Transit:</strong> Metro Line M2 → Stadium Station (Exit B)</li>
+            <li><strong>Shuttle:</strong> Every 15 min from Central Station • 16:00–23:30</li>
+            <li><strong>Parking:</strong> P1–P4 open from 15:00 • Pre-book recommended</li>
+          </ul>
+
+          <h3 class="h4 mt-16">Room details (Day-wise)</h3>
+          <div class="rooms">
+            <div class="room-day">
+              <div class="room-day-head">Day 1 • Fri, Oct 11</div>
+              <div class="room-day-body">
+                <div>Room: <strong>King Deluxe</strong></div>
+                <div class="right">Occupancy: 2 Adults</div>
+                <div>Board: Breakfast</div>
+                <div class="price">$120</div>
+              </div>
+            </div>
+            <div class="room-day">
+              <div class="room-day-head">Day 2 • Sat, Oct 12</div>
+              <div class="room-day-body">
+                <div>Room: <strong>King Deluxe</strong></div>
+                <div class="right">Occupancy: 2 Adults</div>
+                <div>Board: Breakfast</div>
+                <div class="price">$140</div>
+              </div>
+            </div>
+            <div class="room-day">
+              <div class="room-day-head">Day 3 • Sun, Oct 13</div>
+              <div class="room-day-body">
+                <div>Room: <strong>Twin Superior</strong></div>
+                <div class="right">Occupancy: 2 Adults</div>
+                <div>Board: Breakfast</div>
+                <div class="price">$110</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sticky">
+          <button class="btn primary w-full" data-goto="booking">Book Tickets</button>
+        </div>
+      </section>
+
+      <!-- BOOKING -->
+      <section class="screen" id="screen-booking" data-screen="booking" hidden>
+        <div class="pad">
+          <button class="back-btn" data-goto="details" aria-label="Back">
+            <span class="icon-back"></span>
+          </button>
+          <h2 class="h2 mt-8">Booking</h2>
+
+          <div class="summary mt-12">
+            <div class="thumb small"></div>
+            <div>
+              <div class="h4">Championship Final 2025</div>
+              <div class="muted small">Sat, Oct 12 • 7:30 PM</div>
+            </div>
+          </div>
+
+          <h3 class="h4 mt-16">Select Tickets</h3>
+          <div class="ticket">
+            <div>
+              <div class="h4">Regular</div>
+              <div class="muted small">Section A</div>
+            </div>
+            <div class="row gap-8">
+              <div class="price">$75</div>
+              <div class="qty" data-key="regular">
+                <button class="qbtn" data-act="dec">−</button>
+                <span class="qval">0</span>
+                <button class="qbtn" data-act="inc">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket">
+            <div>
+              <div class="h4">Premium</div>
+              <div class="muted small">Section B</div>
+            </div>
+            <div class="row gap-8">
+              <div class="price">$120</div>
+              <div class="qty" data-key="premium">
+                <button class="qbtn" data-act="dec">−</button>
+                <span class="qval">0</span>
+                <button class="qbtn" data-act="inc">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket">
+            <div>
+              <div class="h4">VIP</div>
+              <div class="muted small">Section C</div>
+            </div>
+            <div class="row gap-8">
+              <div class="price">$220</div>
+              <div class="qty" data-key="vip">
+                <button class="qbtn" data-act="dec">−</button>
+                <span class="qval">0</span>
+                <button class="qbtn" data-act="inc">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout">
+          <div>
+            <div class="muted tiny">Total</div>
+            <div id="total" class="total">$0.00</div>
+          </div>
+          <button id="proceedBtn" class="btn primary" data-goto="confirmation">Proceed</button>
+        </div>
+      </section>
+
+      
+      <!-- DASHBOARD -->
+      <section class="screen" id="screen-dashboard" data-screen="dashboard" hidden>
+        <div class="pad">
+          <h2 class="h2">Dashboard</h2>
+          <div class="grid2 mt-12">
+            <div class="card stat"><div class="stat-n">3</div><div class="muted small">Upcoming Events</div></div>
+            <div class="card stat"><div class="stat-n">2</div><div class="muted small">Tickets</div></div>
+            <div class="card stat"><div class="stat-n">1</div><div class="muted small">Notifications</div></div>
+            <div class="card stat"><div class="stat-n">0</div><div class="muted small">Pending</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EVENT ITINERARY -->
+      <section class="screen" id="screen-itinerary" data-screen="itinerary" hidden>
+        <div class="pad">
+          <h2 class="h2">Event Itinerary</h2>
+          <div class="timeline mt-12">
+            <div class="trow"><div class="dot"></div><div><div class="h4">Gates Open</div><div class="muted small">Oct 12, 6:00 PM</div></div></div>
+            <div class="trow"><div class="dot"></div><div><div class="h4">Opening Ceremony</div><div class="muted small">Oct 12, 7:00 PM</div></div></div>
+            <div class="trow"><div class="dot"></div><div><div class="h4">Match Kickoff</div><div class="muted small">Oct 12, 7:30 PM</div></div></div>
+            <div class="trow"><div class="dot"></div><div><div class="h4">Half-time Show</div><div class="muted small">Oct 12, 8:15 PM</div></div></div>
+            <div class="trow"><div class="dot"></div><div><div class="h4">Trophy Ceremony</div><div class="muted small">Oct 12, 9:45 PM</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRAVEL DETAILS PAGE -->
+      <section class="screen" id="screen-travel" data-screen="travel" hidden>
+        <div class="pad">
+          <h2 class="h2">Travel Details</h2>
+          <ul class="list mt-12">
+            <li><strong>Nearest Airport:</strong> Capital International (CIT) – 18 km</li>
+            <li><strong>Transit:</strong> Metro Line M2 → Stadium Station (Exit B)</li>
+            <li><strong>Shuttle:</strong> Every 15 min from Central Station • 16:00–23:30</li>
+            <li><strong>Parking:</strong> P1–P4 open from 15:00 • Pre-book recommended</li>
+          </ul>
+          <div class="card mt-16">
+            <div class="h4">Tips</div>
+            <div class="muted small">Arrive early to avoid congestion. Use Gate 3 for Sections A–C.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROOM DETAILS PAGE -->
+      <section class="screen" id="screen-rooms" data-screen="rooms" hidden>
+        <div class="pad">
+          <h2 class="h2">Room Details (Day-wise)</h2>
+          <div class="rooms mt-12">
+            <div class="room-day">
+              <div class="room-day-head">Day 1 • Fri, Oct 11</div>
+              <div class="room-day-body">
+                <div>Room: <strong>King Deluxe</strong></div>
+                <div>Occupancy: 2 Adults</div>
+                <div>Board: Breakfast</div>
+                <div class="price">$120</div>
+              </div>
+            </div>
+            <div class="room-day">
+              <div class="room-day-head">Day 2 • Sat, Oct 12</div>
+              <div class="room-day-body">
+                <div>Room: <strong>King Deluxe</strong></div>
+                <div>Occupancy: 2 Adults</div>
+                <div>Board: Breakfast</div>
+                <div class="price">$140</div>
+              </div>
+            </div>
+            <div class="room-day">
+              <div class="room-day-head">Day 3 • Sun, Oct 13</div>
+              <div class="room-day-body">
+                <div>Room: <strong>Twin Superior</strong></div>
+                <div>Occupancy: 2 Adults</div>
+                <div>Board: Breakfast</div>
+                <div class="price">$110</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HELPDESK -->
+      <section class="screen" id="screen-helpdesk" data-screen="helpdesk" hidden>
+        <div class="pad">
+          <h2 class="h2">Helpdesk</h2>
+          <div class="card mt-12">
+            <div class="h4">Contact</div>
+            <div class="muted small">Email: support@eventx.example</div>
+            <div class="muted small">Phone: +1 (555) 123-4567</div>
+          </div>
+          <div class="card mt-12">
+            <div class="h4">Live Chat</div>
+            <button class="btn ghost mt-8">Start Chat</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FLASH NOTIFICATIONS -->
+      <section class="screen" id="screen-flash" data-screen="flash" hidden>
+        <div class="pad">
+          <h2 class="h2">Flash Notifications</h2>
+          <div class="notif-list mt-12">
+            <div class="notif">
+              <div class="title">Gate Change</div>
+              <div class="body muted">Your entry gate updated to Gate 3.</div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="notif">
+              <div class="title">Weather Alert</div>
+              <div class="body muted">Light showers expected. Carry a raincoat.</div>
+              <div class="time">30 min ago</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATTENDANCE -->
+      <section class="screen" id="screen-attendance" data-screen="attendance" hidden>
+        <div class="pad">
+          <h2 class="h2">Attendance</h2>
+          <div class="card mt-12">
+            <div class="muted small">Scan QR at entry checkpoints to mark attendance.</div>
+            <button class="btn primary mt-12">Open QR Scanner (mock)</button>
+          </div>
+          <div class="card mt-12">
+            <div class="h4">History</div>
+            <div class="muted tiny">No entries yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="screen" id="screen-reports" data-screen="reports" hidden>
+        <div class="pad">
+          <h2 class="h2">Reports</h2>
+          <div class="card mt-12">
+            <div class="h4">Downloads</div>
+            <div class="row gap-12 mt-12">
+              <button class="btn ghost">Itinerary (PDF)</button>
+              <button class="btn ghost">Tickets (PDF)</button>
+              <button class="btn ghost">Invoice (PDF)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONFIRMATION -->
+      <section class="screen" id="screen-confirmation" data-screen="confirmation" hidden>
+        <div class="pad center">
+          <div class="confetti">🎉</div>
+          <h2 class="h2 mt-8">Booking Confirmed!</h2>
+          <div class="muted">Order #SBR-2025-1043</div>
+
+          <div class="card mt-16">
+            <div class="h4">Championship Final 2025</div>
+            <div class="muted small">Sat, Oct 12 • 7:30 PM</div>
+            <div class="muted small">National Stadium, Capital City</div>
+          </div>
+
+          <div class="row gap-12 mt-16">
+            <button class="btn ghost" data-goto="listing">Home</button>
+            <button class="btn primary" data-goto="tickets">View Tickets</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOTIFICATIONS -->
+      <section class="screen" id="screen-notifications" data-screen="notifications" hidden>
+        <div class="section-header">
+          <h2 class="h2">Notifications</h2>
+          <div class="muted small">Latest updates about your tickets & events</div>
+        </div>
+        <div id="notifList" class="notif-list">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottombar" id="bottombar" aria-label="Primary">
+      <button class="tab" data-tab="listing">
+        <span class="ico home"></span>
+        <span class="lbl">Home</span>
+      </button>
+      <button class="tab" data-tab="search">
+        <span class="ico search"></span>
+        <span class="lbl">Search</span>
+      </button>
+      <button class="tab" data-tab="tickets">
+        <span class="ico ticket"></span>
+        <span class="lbl">Tickets</span>
+      </button>
+      <button class="tab" data-tab="notifications">
+        <span class="ico bell"></span>
+        <span class="lbl">Alerts</span>
+      </button>
+      <button class="tab" data-tab="profile">
+        <span class="ico user"></span>
+        <span class="lbl">Profile</span>
+      </button>
+    </nav>
+
+    <!-- Search overlay -->
+    <div id="searchOverlay" class="overlay" hidden>
+      <div class="overlay-card">
+        <input id="searchInput" class="input" placeholder="Search events, venues..." autofocus />
+        <div class="row gap-8 mt-12">
+          <button class="btn ghost" id="searchClose">Close</button>
+          <button class="btn primary" id="searchGo">Search</button>
+        </div>
+      </div>
+    
+    <!-- Side Drawer -->
+    <div id="sideDrawer" class="drawer" hidden>
+      <div class="drawer-panel">
+        <div class="drawer-head">
+          <div class="avatar"></div>
+          <div>
+            <div class="h4">Your Name</div>
+            <div class="muted tiny">you@example.com</div>
+          </div>
+          <button id="drawerClose" class="icon-btn small" aria-label="Close">✕</button>
+        </div>
+        <nav class="drawer-menu">
+          <button class="ditem" data-goto="dashboard">Dashboard</button>
+          <button class="ditem" data-goto="itinerary">Event itinerary</button>
+          <button class="ditem" data-goto="travel">Travel details</button>
+          <button class="ditem" data-goto="rooms">Room details</button>
+          <button class="ditem" data-goto="helpdesk">Helpdesk</button>
+          <button class="ditem" data-goto="flash">Flash notifications</button>
+          <button class="ditem" data-goto="attendance">Attendance</button>
+          <button class="ditem" data-goto="reports">Reports</button>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
