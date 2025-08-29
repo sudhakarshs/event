@@ -19,7 +19,35 @@
   const prices = { regular:75, premium:120, vip:220 };
   const qty = { regular:0, premium:0, vip:0 };
 
-  // --- Search dataset (mock) ---
+  // Drawer
+ const sideDrawer = $('#sideDrawer');
+const drawerClose = $('#drawerClose');
+
+function openDrawer(){ sideDrawer.hidden = false; }
+function closeDrawer(){ sideDrawer.hidden = true; }
+
+if(drawerClose){ drawerClose.addEventListener('click', closeDrawer); }
+sideDrawer.addEventListener('click', (e)=>{
+  if(e.target === sideDrawer) closeDrawer();
+});
+
+$$('.ditem', sideDrawer).forEach(btn => {
+  btn.addEventListener('click', ()=>{
+    closeDrawer();
+    const dest = btn.dataset.goto;
+    if(dest) show(dest);
+  });
+});
+
+  $$('.ditem', sideDrawer).forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      closeDrawer();
+      const dest = btn.dataset.goto;
+      if(dest) show(dest);
+    });
+  });
+
+  // --- Mock Data ---
   const events = [
     { id: 'final-2025', title:'Championship Final 2025', date:'2025-10-12T19:30:00', pretty:'Sat, Oct 12 • 7:30 PM', venue:'National Stadium', city:'Capital City', price:75 },
     { id: 'derby-city', title:'City Derby', date:'2025-11-03T18:00:00', pretty:'Sun, Nov 3 • 6:00 PM', venue:'Metro Arena', city:'Downtown', price:59 },
@@ -28,7 +56,6 @@
     { id: 'tech-con', title:'TechCon Keynote', date:'2025-10-01T10:00:00', pretty:'Wed, Oct 1 • 10:00 AM', venue:'Expo Center', city:'Capital City', price:0 }
   ];
 
-  // --- Notifications dataset (mock) ---
   const notifications = [
     { id:'n1', title:'Your booking is confirmed', body:'Order #SBR-2025-1043 for Championship Final 2025.', time:'Just now' },
     { id:'n2', title:'Price drop alert', body:'City Derby tickets dropped to $55 for Section B.', time:'2h ago' },
@@ -39,18 +66,15 @@
     screens.forEach(s => {
       s.hidden = s.dataset.screen !== screenName;
     });
-    // Topbar & bottom visibility
     const hideBars = screenName === 'login';
     bottom.style.display = hideBars ? 'none' : 'grid';
     $('.topbar').style.display = hideBars ? 'none' : 'flex';
-    // Tab active
     tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === screenName));
-    // Focus management
     if(screenName === 'login'){ $('#email')?.focus(); }
     if(screenName === 'notifications'){ renderNotifications(); }
   }
 
-  // Router for data-goto
+  // Router
   document.addEventListener('click', (e)=>{
     const gotoEl = e.target.closest('[data-goto]');
     if(!gotoEl) return;
@@ -70,14 +94,18 @@
 
   // Tabs
   tabs.forEach(t=> t.addEventListener('click', ()=>{
-    const dest = t.dataset.tab;
-    if(dest === 'search'){ openSearch(); return; }
-    if(dest === 'tickets'){ show('confirmation'); return; }
-    if(dest === 'profile'){ alert('Profile screen not implemented in this mock.'); return; }
-    show(dest);
-  }));
+  const dest = t.dataset.tab;
+  if(dest === 'search'){ openSearch(); return; }
+  if(dest === 'tickets'){ show('confirmation'); return; }
+  if(dest === 'profile'){ 
+    searchOverlay.hidden = true;   // ✅ always hide search
+    openDrawer(); 
+    return; 
+  }
+  show(dest);
+}));
 
-  // Search overlay open/close/submit
+  // --- Search Overlay ---
   function openSearch(){
     searchOverlay.hidden = false;
     setTimeout(()=> searchInput?.focus(), 50);
@@ -86,65 +114,11 @@
   searchClose.addEventListener('click', ()=> searchOverlay.hidden = true);
   searchOverlay.addEventListener('click', (e)=>{
     if(e.target === searchOverlay) searchOverlay.hidden = true;
-  const sideDrawer = $('#sideDrawer');
-  const drawerClose = $('#drawerClose');
-
-  function openDrawer(){ sideDrawer.hidden = false; }
-  function closeDrawer(){ sideDrawer.hidden = true; }
-
-  // Profile tab opens drawer
-  tabs.forEach(t=> t.addEventListener('click', ()=>{
-    const dest = t.dataset.tab;
-    if(dest === 'profile'){ openDrawer(); }
-  }));
-
-  // Close drawer on close button or backdrop click
-  if(drawerClose){ drawerClose.addEventListener('click', closeDrawer); }
-  sideDrawer.addEventListener('click', (e)=>{
-    if(e.target === sideDrawer) closeDrawer();
-  });
-
-  // Drawer menu routing
-  $$('.ditem', sideDrawer).forEach(btn => {
-    btn.addEventListener('click', ()=>{
-      closeDrawer();
-      const dest = btn.dataset.goto;
-      if(dest) show(dest);
-    });
-  });
-
   });
   searchGo.addEventListener('click', ()=> {
     const q = searchInput.value;
     performSearch(q);
     searchOverlay.hidden = true;
-  const sideDrawer = $('#sideDrawer');
-  const drawerClose = $('#drawerClose');
-
-  function openDrawer(){ sideDrawer.hidden = false; }
-  function closeDrawer(){ sideDrawer.hidden = true; }
-
-  // Profile tab opens drawer
-  tabs.forEach(t=> t.addEventListener('click', ()=>{
-    const dest = t.dataset.tab;
-    if(dest === 'profile'){ openDrawer(); }
-  }));
-
-  // Close drawer on close button or backdrop click
-  if(drawerClose){ drawerClose.addEventListener('click', closeDrawer); }
-  sideDrawer.addEventListener('click', (e)=>{
-    if(e.target === sideDrawer) closeDrawer();
-  });
-
-  // Drawer menu routing
-  $$('.ditem', sideDrawer).forEach(btn => {
-    btn.addEventListener('click', ()=>{
-      closeDrawer();
-      const dest = btn.dataset.goto;
-      if(dest) show(dest);
-    });
-  });
-
     show('search');
   });
   searchInput.addEventListener('keydown', (e)=>{
@@ -154,7 +128,7 @@
     }
   });
 
-  // Notifications
+  // --- Notifications ---
   notifBtn.addEventListener('click', ()=> show('notifications'));
   function renderNotifications(){
     notifList.innerHTML = '';
@@ -170,7 +144,7 @@
     });
   }
 
-  // Quantity handlers
+  // --- Qty Handlers ---
   $$('.qty').forEach(box => {
     box.addEventListener('click', (e)=>{
       const act = e.target.dataset.act;
@@ -188,11 +162,10 @@
   }
 
   function updateTotal(){
-    const total = (qty.regular*prices.regular) + (qty.premium*prices.premium) + (qty.vip*prices.vip);
-    $('#total').textContent = `$${total.toFixed(2)}`;
+    $('#total').textContent = `$${calcTotal().toFixed(2)}`;
   }
 
-  // Search logic
+  // --- Search Logic ---
   function renderEventCard(e){
     const el = document.createElement('article');
     el.className = 'card event';
@@ -230,7 +203,6 @@
     }
     searchResults.innerHTML = '';
     filtered.forEach(e => searchResults.appendChild(renderEventCard(e)));
-    // Attach click handlers for the rendered cards
     $$('.card.event', searchResults).forEach(card => {
       card.addEventListener('click', (ev)=>{
         const id = ev.target.dataset.eventId || card.dataset.eventId;
@@ -241,17 +213,14 @@
   }
 
   function setDetails(e){
-    // Populate the details screen with selected event
     $('#screen-details .h2').textContent = e.title;
     const meta = $$('#screen-details .meta span:nth-child(2)');
     if(meta[0]) meta[0].textContent = e.pretty;
     if(meta[1]) meta[1].textContent = `${e.venue}, ${e.city}`;
-    // Also update booking summary
     $$('#screen-booking .summary .h4')[0].textContent = e.title;
     $$('#screen-booking .summary .muted')[0].textContent = e.pretty;
   }
 
-    // Proceed handler
   if (proceedBtn) {
     proceedBtn.addEventListener('click', (e)=>{
       e.preventDefault();
@@ -264,34 +233,8 @@
     });
   }
 
-  // Explicitly hide overlays and init route
+  // Init
   searchOverlay.hidden = true;
-  const sideDrawer = $('#sideDrawer');
-  const drawerClose = $('#drawerClose');
-
-  function openDrawer(){ sideDrawer.hidden = false; }
-  function closeDrawer(){ sideDrawer.hidden = true; }
-
-  // Profile tab opens drawer
-  tabs.forEach(t=> t.addEventListener('click', ()=>{
-    const dest = t.dataset.tab;
-    if(dest === 'profile'){ openDrawer(); }
-  }));
-
-  // Close drawer on close button or backdrop click
-  if(drawerClose){ drawerClose.addEventListener('click', closeDrawer); }
-  sideDrawer.addEventListener('click', (e)=>{
-    if(e.target === sideDrawer) closeDrawer();
-  });
-
-  // Drawer menu routing
-  $$('.ditem', sideDrawer).forEach(btn => {
-    btn.addEventListener('click', ()=>{
-      closeDrawer();
-      const dest = btn.dataset.goto;
-      if(dest) show(dest);
-    });
-  });
-
+  sideDrawer.hidden = true;
   show('login');
 })();

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>Event App • Dark</title>
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
   <div class="phone" id="app">
@@ -20,7 +21,7 @@
         <button id="searchBtn" class="icon-btn" aria-label="Search">
           <span class="icon-search"></span>
         </button>
-        <button id="notifBtn" class="icon-btn" aria-label="Notifications">
+        <button id="notifBtn" class="icon-btn" aria-label="Notifications" hidden>
           <span class="icon-bell"></span>
         </button>
       </div>
@@ -74,14 +75,14 @@
               <img src="event1.png">
             </div>
             <div class="content">
-              <h3 class="h3">Championship Final 2025</h3>
+              <h3 class="h3">Marketing AI Conference</h3>
               <div class="meta">
                 <span class="icon clock"></span>
-                <span>Sat, Oct 12 • 7:30 PM</span>
+                <span>Sat, Aug 30 • 7:30 PM</span>
               </div>
               <div class="meta">
                 <span class="icon pin"></span>
-                <span>National Stadium, Capital City</span>
+                <span>HSR Layout, Bengaluru</span>
               </div>
             </div>
           </article>
@@ -91,46 +92,46 @@
               <img src="event2.png">
             </div>
             <div class="content">
-              <h3 class="h3">City Derby</h3>
+              <h3 class="h3">Birla Tisya Rajajinagar</h3>
               <div class="meta">
                 <span class="icon clock"></span>
                 <span>Sun, Nov 3 • 6:00 PM</span>
               </div>
               <div class="meta">
                 <span class="icon pin"></span>
-                <span>Metro Arena, Downtown</span>
+                <span>Rajajinagar, Bengaluru</span>
               </div>
             </div>
           </article>
           <article class="card event" data-goto="details">
             <div class="event-list">
-              <img src="event1.png">
+              <img src="event3.png">
             </div>
             <div class="content">
-              <h3 class="h3">City Derby</h3>
+              <h3 class="h3">Global Startups Club</h3>
               <div class="meta">
                 <span class="icon clock"></span>
                 <span>Sun, Nov 3 • 6:00 PM</span>
               </div>
               <div class="meta">
                 <span class="icon pin"></span>
-                <span>Metro Arena, Downtown</span>
+                <span>Marathahalli, Bengaluru</span>
               </div>
             </div>
           </article>
           <article class="card event" data-goto="details">
             <div class="event-list">
-              <img src="event2.png">
+              <img src="event4.png">
             </div>
             <div class="content">
-              <h3 class="h3">City Derby</h3>
+              <h3 class="h3">Business Networking 2025</h3>
               <div class="meta">
                 <span class="icon clock"></span>
                 <span>Sun, Nov 3 • 6:00 PM</span>
               </div>
               <div class="meta">
                 <span class="icon pin"></span>
-                <span>Metro Arena, Downtown</span>
+                <span>Marathahalli, Bengaluru</span>
               </div>
             </div>
           </article>
@@ -155,9 +156,9 @@
           <button class="back-btn" data-goto="listing" aria-label="Back">
             <span class="icon-back"></span>
           </button>
-          <h2 class="h2 mt-8">Championship Final 2025</h2>
+          <h2 class="h2 mt-8">Marketing AI Conference</h2>
           <div class="meta mt-8"><span class="icon clock"></span><span>Sat, Oct 12 • 7:30 PM</span></div>
-          <div class="meta mt-6"><span class="icon pin"></span><span>National Stadium, Capital City</span></div>
+          <div class="meta mt-6"><span class="icon pin"></span><span>HSR Layout, Bengaluru</span></div>
 
           <h3 class="h4 mt-16">About the event</h3>
           <p class="muted">
@@ -218,9 +219,9 @@
           <h2 class="h2 mt-8">Booking</h2>
 
           <div class="summary mt-12">
-            <div class="thumb small"></div>
+            <div class="thumb small"></div>  
             <div>
-              <div class="h4">Championship Final 2025</div>
+              <div class="h4">Marketing AI Conference</div>
               <div class="muted small">Sat, Oct 12 • 7:30 PM</div>
             </div>
           </div>
@@ -435,9 +436,9 @@
           <div class="muted">Order #SBR-2025-1043</div>
 
           <div class="card mt-16">
-            <div class="h4">Championship Final 2025</div>
+            <div class="h4">Marketing AI Conference</div>
             <div class="muted small">Sat, Oct 12 • 7:30 PM</div>
-            <div class="muted small">National Stadium, Capital City</div>
+            <div class="muted small">HSR Layout, Bangalore</div>
           </div>
 
           <div class="row gap-12 mt-16">
@@ -462,23 +463,23 @@
     <!-- Bottom Navigation -->
     <nav class="bottombar" id="bottombar" aria-label="Primary">
       <button class="tab" data-tab="listing">
-        <span class="ico home"></span>
+        <i class="fas fa-home"></i>
         <span class="lbl">Home</span>
       </button>
       <button class="tab" data-tab="search">
-        <span class="ico search"></span>
+        <i class="fas fa-search"></i>
         <span class="lbl">Search</span>
       </button>
-      <button class="tab" data-tab="tickets">
-        <span class="ico ticket"></span>
+      <!-- <button class="tab" data-tab="tickets">
+        <i class="fas fa-ticket-alt"></i>
         <span class="lbl">Tickets</span>
-      </button>
+      </button> -->
       <button class="tab" data-tab="notifications">
-        <span class="ico bell"></span>
-        <span class="lbl">Alerts</span>
+        <i class="fas fa-bell"></i>
+        <span class="lbl">Announcements</span>
       </button>
       <button class="tab" data-tab="profile">
-        <span class="ico user"></span>
+        <i class="fas fa-user"></i>
         <span class="lbl">Profile</span>
       </button>
     </nav>
@@ -493,8 +494,11 @@
         </div>
       </div>
     
+    
+
+    </div>
     <!-- Side Drawer -->
-    <div id="sideDrawer" class="drawer" hidden>
+    <div id="sideDrawer" class="drawer">
       <div class="drawer-panel">
         <div class="drawer-head">
           <div class="avatar"></div>
@@ -516,8 +520,6 @@
         </nav>
       </div>
     </div>
-
-  </div>
 
   <script src="./script.js"></script>
 </body>
